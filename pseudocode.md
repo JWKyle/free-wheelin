@@ -9,4 +9,8 @@ In the UI, we'll need the user to input:
         Amount of time at the location       
     **Future Ride Setups:**
         Places/landmarks they'd like to visit to be added to the list
-        
+    **View the List of Destinations**
+        View the table
+    **Show the starting address for verification**
+        Possibly allow for option of new starting destination?
+    
