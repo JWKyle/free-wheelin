@@ -41,15 +41,9 @@ create_table = <<-SQL
 SQL
 
 db.execute(create_table)
-time = 45
-speed = 13
-# class Wheels
-    
-    # def initialize(db, time, speed)
+# time = 45
+# speed = 13
 
-    # @time = time
-    # @speed = speed
-    # end
 
     def show_locations(db)
         landmarks = db.execute("SELECT * FROM test")
@@ -67,10 +61,10 @@ speed = 13
         time = time.to_f
         speed = speed.to_f
         max_distance = (((speed/60.0) * time)/2.0).to_f
-        p max_distance
+        # time_leg = 
         landmarks = db.execute("SELECT * FROM test WHERE distance<= #{max_distance}")
         landmarks.map do |locals|
-            puts "#{locals['location']} is #{locals['distance']} miles away."
+            puts "You can ride over to #{locals['location']}. It is #{locals['distance']} miles away."
         end      
     end        
 
@@ -84,12 +78,46 @@ speed = 13
 
 #### DRIVER CODE ####
 
+puts "Welcome to Free Wheelin'!"
+puts "How much time do you have for a bike ride?"
+time = gets.chomp.to_f
+puts "How intense would you like your ride to be?  (L)eisurely, (M)oderate, (W)orkout, or (C)ustom?"
+    intensity = gets.chomp.downcase
+    # val_input = false
+    # until val_input
+        if intensity == "l"
+            puts "You've chosen a leisurely pace, which is roughly 8mph."
+            speed = 8.0
+            # val_input = true
+        elsif intensity == "m"
+            puts "You've chosen a moderate pace, which is roughly 11mph."
+            speed = 11.0
+            # val_input = true
+        elsif intensity == "w"
+            puts "You've chosen a workout ride, which is roughly 14mph."
+            speed = 14.0
+            # val_input = true
+        elsif intensity == "c"
+            puts    "Please choose your average speed in MPH:"
+            speed = gets.chomp.to_f
+            # val_input = true
+        else
+            puts "I didn't understand what you typed.  Please try again."
+        end
+    # end
+
+location_finder(db, time, speed)
+
+
+
+## TEST CODE ##
+
 # wheels = Wheels.new($db, 45, 13)
 
 #location_maker(db, "900 North", 0)
 
 # wheels.show_locations(db)
-location_finder(db, time, speed)
+# location_finder(db, time, speed)
 
 # 20.times do 
 #     location_maker(db,Faker::Address.street_name, rand(10))
