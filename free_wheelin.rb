@@ -42,10 +42,12 @@ SQL
 
 db.execute(create_table)
 
-# class Wheels(minutes, current_location)
+class Wheels
+    
+    def initialize(db)
 
-    # @minutes = minutes
-    # @location = location
+    # @time = time
+    end
 
     def show_locations(db)
         landmarks = db.execute("SELECT * FROM test")
@@ -59,15 +61,19 @@ db.execute(create_table)
     end
 
 
+end
 
 
 
 # end
 
 #### DRIVER CODE ####
-show_locations(db)
 
-# wheels = Wheels.new(minutes, location)
+wheels = Wheels.new(db)
+
+wheels.location_maker(db, "Grant Park", 5)
+
+wheels.show_locations(db)
 
 # 20.times do 
 #     location_maker(db,Faker::Address.street_name, rand(10))
