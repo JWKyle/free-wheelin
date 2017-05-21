@@ -44,12 +44,15 @@ db.execute(create_table)
 
 # class Wheels(minutes, current_location)
 
-#     @minutes = minutes
-#     @location = location
+    # @minutes = minutes
+    # @location = location
 
-#     def show_locations
-#         #####
-#     end
+    def show_locations(db)
+        landmarks = db.execute("SELECT * FROM test")
+        landmarks.each do |locals|
+            puts "#{locals['location']} is #{locals['distance']} miles away."
+        end      
+    end
 
     def location_maker(db, location, distance)
         db.execute("INSERT INTO test (location, distance) VALUES (?, ?)", [location, distance])
@@ -62,13 +65,14 @@ db.execute(create_table)
 # end
 
 #### DRIVER CODE ####
+show_locations(db)
 
 # wheels = Wheels.new(minutes, location)
 
-20.times do 
-    location_maker(db,Faker::Address.street_name, rand(10))
+# 20.times do 
+#     location_maker(db,Faker::Address.street_name, rand(10))
     
-end
+# end
 
 
 
