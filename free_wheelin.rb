@@ -64,7 +64,10 @@ speed = 13
 
     def location_finder(db, time, speed)
         #Need to have it iterate through the distance column only"
-        max_distance = ((speed/60) * time)
+        time = time.to_f
+        speed = speed.to_f
+        max_distance = (((speed/60.0) * time)/2.0).to_f
+        p max_distance
         landmarks = db.execute("SELECT * FROM test WHERE distance<= #{max_distance}")
         landmarks.map do |locals|
             puts "#{locals['location']} is #{locals['distance']} miles away."
