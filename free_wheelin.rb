@@ -25,15 +25,31 @@
 # add ability to add/delete locations
 
 #New Location Table creation
+#gems
 
-class Wheels(minutes, current_location)
+require 'sqlite3'
+require "faker"
+db = SQLite3::Database.new("test.db")
+db.results_as_hash = true
 
-    @minutes = minutes
-    @location = location
+create_table = <<-SQL
+    CREATE TABLE IF NOT EXISTS test(
+        id INTEGER PRIMARY KEY,
+        location VARCHAR(255),
+        distance INT
+    )
+SQL
 
-    def show_locations
-        #####
-    end
+db.execute(create_table)
+
+# class Wheels(minutes, current_location)
+
+#     @minutes = minutes
+#     @location = location
+
+#     def show_locations
+#         #####
+#     end
 
     def location_maker(db, name, location)
         db.execute("INSERT INTO test (name, location) VALUES (?, ?)", [name, location])
@@ -43,16 +59,16 @@ class Wheels(minutes, current_location)
 
 
 
-end
+# end
 
 #### DRIVER CODE ####
 
-wheels = Wheels.new(minutes, location)
+# wheels = Wheels.new(minutes, location)
 
 20.times do 
-    wheels.location_maker(db, )
+    wheels.location_maker(db,Faker::Address.street_name, rand(10))
     
-end
+# end
 
 
 
