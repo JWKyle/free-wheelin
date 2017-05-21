@@ -62,12 +62,12 @@ speed = 13
         db.execute("INSERT INTO test (location, distance) VALUES (?, ?)", [location, distance])
     end
 
-    def location_finder(db)
-        landmarks = db.execute("SELECT distance FROM test")
-        landmarks.each do |miles|
-            if miles <= ((@speed/60) * @time)
+    def location_finder(db, time, speed)
+        #Need to have it iterate through the distance column only"
+        max_distance = ((speed/60) * time)
+        landmarks = db.execute("SELECT * FROM test WHERE distance<= #{max_distance}")
+        landmarks.map do |locals|
             puts "#{locals['location']} is #{locals['distance']} miles away."
-            end
         end      
     end        
 
@@ -83,10 +83,10 @@ speed = 13
 
 # wheels = Wheels.new($db, 45, 13)
 
-# wheels.location_maker(db, "Grant Park", 5)
+#location_maker(db, "900 North", 0)
 
 # wheels.show_locations(db)
-location_finder(db)
+location_finder(db, time, speed)
 
 # 20.times do 
 #     location_maker(db,Faker::Address.street_name, rand(10))
