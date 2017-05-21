@@ -51,8 +51,8 @@ db.execute(create_table)
 #         #####
 #     end
 
-    def location_maker(db, name, location)
-        db.execute("INSERT INTO test (name, location) VALUES (?, ?)", [name, location])
+    def location_maker(db, location, distance)
+        db.execute("INSERT INTO test (location, distance) VALUES (?, ?)", [location, distance])
     end
 
 
@@ -66,7 +66,7 @@ db.execute(create_table)
 # wheels = Wheels.new(minutes, location)
 
 20.times do 
-    wheels.location_maker(db,Faker::Address.street_name, rand(10))
+    location_maker(db,Faker::Address.street_name, rand(10))
     
 end
 
