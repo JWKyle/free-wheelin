@@ -41,8 +41,6 @@ create_table = <<-SQL
 SQL
 
 db.execute(create_table)
-# time = 45
-# speed = 13
 
 
     def show_locations(db)
@@ -68,13 +66,6 @@ db.execute(create_table)
         end      
     end        
 
-
-
-# end
-
-
-
-# end
 
 #### DRIVER CODE ####
 
