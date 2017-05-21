@@ -26,7 +26,7 @@
 
 #New Location Table creation
 
-class Wheels(minutes, location)
+class Wheels(minutes, current_location)
 
     @minutes = minutes
     @location = location
@@ -35,7 +35,9 @@ class Wheels(minutes, location)
         #####
     end
 
-    
+    def location_maker(db, name, location)
+        db.execute("INSERT INTO test (name, location) VALUES (?, ?)", [name, location])
+    end
 
 
 
@@ -47,7 +49,10 @@ end
 
 wheels = Wheels.new(minutes, location)
 
-
+20.times do 
+    wheels.location_maker(db, )
+    
+end
 
 
 
