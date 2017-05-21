@@ -29,8 +29,8 @@
 
 require 'sqlite3'
 require "faker"
-$db = SQLite3::Database.new("test.db")
-$db.results_as_hash = true
+db = SQLite3::Database.new("test.db")
+db.results_as_hash = true
 
 create_table = <<-SQL
     CREATE TABLE IF NOT EXISTS test(
@@ -40,16 +40,16 @@ create_table = <<-SQL
     )
 SQL
 
-$db.execute(create_table)
-# time = 45
-# speed = 13
-class Wheels
+db.execute(create_table)
+time = 45
+speed = 13
+# class Wheels
     
-    def initialize(db, time, speed)
+    # def initialize(db, time, speed)
 
-    @time = time
-    @speed = speed
-    end
+    # @time = time
+    # @speed = speed
+    # end
 
     def show_locations(db)
         landmarks = db.execute("SELECT * FROM test")
@@ -62,10 +62,10 @@ class Wheels
         db.execute("INSERT INTO test (location, distance) VALUES (?, ?)", [location, distance])
     end
 
-    def location_finder
-        landmarks = $db.execute("SELECT * FROM test")
-        landmarks.map do |locals|
-            if (locals[2]) <= ((@speed/60) * @time)
+    def location_finder(db)
+        landmarks = db.execute("SELECT distance FROM test")
+        landmarks.each do |miles|
+            if miles <= ((@speed/60) * @time)
             puts "#{locals['location']} is #{locals['distance']} miles away."
             end
         end      
@@ -73,7 +73,7 @@ class Wheels
 
 
 
-end
+# end
 
 
 
@@ -81,12 +81,12 @@ end
 
 #### DRIVER CODE ####
 
-wheels = Wheels.new($db, 45, 13)
+# wheels = Wheels.new($db, 45, 13)
 
 # wheels.location_maker(db, "Grant Park", 5)
 
 # wheels.show_locations(db)
-wheels.location_finder
+location_finder(db)
 
 # 20.times do 
 #     location_maker(db,Faker::Address.street_name, rand(10))
