@@ -68,7 +68,7 @@ db.execute(create_table)
 20.times do 
     wheels.location_maker(db,Faker::Address.street_name, rand(10))
     
-# end
+end
 
 
 
