@@ -53,7 +53,8 @@ db.execute(create_table)
     def location_maker(db, location, distance)
         db.execute("INSERT INTO test (location, distance) VALUES (?, ?)", [location, distance])
     end
-        def location_remover(db, idnumber)
+
+    def location_remover(db, idnumber)
         db.execute("DELETE FROM test WHERE id=(?)", [idnumber])
     end
 
@@ -66,6 +67,27 @@ db.execute(create_table)
             puts "You can ride over to #{locals['location']}. It is #{locals['distance']} miles away."
         end      
     end
+
+    def loc_adder(db)
+        show_locations(db)
+        puts "What place would you like to add?"
+        location = gets.chomp
+        puts "How many miles away is it?"
+        distance = gets.chomp.to_f
+        location_maker(db, location, distance)
+        puts "Here is your updates list:"
+        show_locations(db)
+    end
+
+    def loc_remover(db)
+        show_locations(db)
+        puts "What is the Location Number that you'd like to remove?"
+        idnumber = gets.chomp.to_i
+        location_remover(db, idnumber)
+        puts "Here is your updated list:"
+        show_locations(db)        
+    end  
+
     def ride(db)
     puts "How many minutes do you have for a bike ride?"
     time = gets.chomp.to_f
@@ -95,34 +117,22 @@ db.execute(create_table)
 puts "Welcome to Free Wheelin'!"
 puts "Would you like to (p)lan a ride, (l)ist all your locations, (a)dd to your list, or (r)emove from the list?"
     choice = gets.chomp.downcase
-    if choice == 'p'
-        ride(db)
-    elsif choice == 'l'
-        puts "Here is your current list of possible destinations:"
-        show_locations(db)
-    elsif choice == 'a'
-        show_locations(db)
-        puts "What place would you like to add?"
-        location = gets.chomp
-        puts "How many miles away is it?"
-        distance = gets.chomp.to_f
-        location_maker(db, location, distance)
-        puts "Here is your updates list:"
-        show_locations(db)
-    elsif choice == 'r'
-        show_locations(db)
-        puts "What is the Location Number that you'd like to remove?"
-        idnumber = gets.chomp.to_i
-        location_remover(db, idnumber)
-        puts "Here is your updated list:"
-        show_locations(db)
-    else
-        puts "I don't understand.  Please try again."
-    end
+        if choice == 'p'
+            ride(db)
+        elsif choice == 'l'
+            puts "Here is your current list of possible destinations:"
+            show_locations(db)
+        elsif choice == 'a'
+            loc_adder(db)
+        elsif choice == 'r'
+            loc_remover(db)
+        else
+            puts "I don't understand.  Please try again."
+        end
 
         
 
-
+#### Testing Code ####
 
 # def ride
 #     puts "How many minutes do you have for a bike ride?"
