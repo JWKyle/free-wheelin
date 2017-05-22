@@ -64,7 +64,7 @@ db.execute(create_table)
         max_distance = (((speed/60.0) * time)/2.0).to_f
         landmarks = db.execute("SELECT * FROM test WHERE distance<= #{max_distance}")
         landmarks.map do |locals|
-            puts "You can ride over to #{locals['location']}. It is #{locals['distance']} miles away."
+            puts "You can ride to #{locals['location']} and back. It is #{locals['distance']} miles away."
         end      
     end
 
@@ -89,47 +89,61 @@ db.execute(create_table)
     end  
 
     def ride(db)
+    puts "Let's plan a quick bike ride!"  
     puts "How many minutes do you have for a bike ride?"
     time = gets.chomp.to_f
-    puts "How intense would you like your ride to be?  (L)eisurely, (M)oderate, (W)orkout, or (C)ustom?"
-        intensity = gets.chomp.downcase
-            if intensity == "l"
-                puts "You've chosen a leisurely pace, which is roughly 8 mph."
-                speed = 8.0
-            elsif intensity == "m"
-                puts "You've chosen a moderate pace, which is roughly 11 mph."
-                speed = 11.0
-            elsif intensity == "w"
-                puts "You've chosen a workout ride, which is roughly 14 mph."
-                speed = 14.0
-            elsif intensity == "c"
-                puts    "Please choose your average speed in MPH:"
-                speed = gets.chomp.to_f
-            else
-                puts "I didn't understand what you typed.  Please try again."
-            end
-        location_finder(db, time, speed)
- end        
+    valid_input = false
+        until valid_input 
+            puts "How intense would you like your ride to be?  (L)eisurely, (M)oderate, (W)orkout, or (C)ustom?"
+                intensity = gets.chomp.downcase
+                    if intensity == "l"
+                        puts "You've chosen a leisurely pace, which is roughly 8 mph."
+                        speed = 8.0
+                        valid_input = true
+                    elsif intensity == "m"
+                        puts "You've chosen a moderate pace, which is roughly 11 mph."
+                        speed = 11.0
+                        valid_input = true
+                    elsif intensity == "w"
+                        puts "You've chosen a workout ride, which is roughly 14 mph."
+                        speed = 14.0
+                        valid_input = true
+                    elsif intensity == "c"
+                        puts    "Please choose your average speed in MPH:"
+                        speed = gets.chomp.to_f
+                        valid_input = true
+                    else
+                        puts "I didn't understand what you typed.  Please try again."
+                    end
+            location_finder(db, time, speed)
+        end
+    end        
 
 
 #### DRIVER CODE ####
 
 puts "Welcome to Free Wheelin'!"
+valid_input = false
+until valid_input
 puts "Would you like to (p)lan a ride, (l)ist all your locations, (a)dd to your list, or (r)emove from the list?"
     choice = gets.chomp.downcase
         if choice == 'p'
             ride(db)
+            valid_input = true
         elsif choice == 'l'
             puts "Here is your current list of possible destinations:"
             show_locations(db)
+            valid_input = true
         elsif choice == 'a'
             loc_adder(db)
+            valid_input = true
         elsif choice == 'r'
             loc_remover(db)
+            valid_input = true
         else
             puts "I don't understand.  Please try again."
         end
-
+end
         
 
 #### Testing Code ####
