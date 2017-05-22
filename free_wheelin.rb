@@ -73,13 +73,13 @@ time = gets.chomp.to_f
 puts "How intense would you like your ride to be?  (L)eisurely, (M)oderate, (W)orkout, or (C)ustom?"
     intensity = gets.chomp.downcase
         if intensity == "l"
-            puts "You've chosen a leisurely pace, which is roughly 8mph."
+            puts "You've chosen a leisurely pace, which is roughly 8 mph."
             speed = 8.0
         elsif intensity == "m"
-            puts "You've chosen a moderate pace, which is roughly 11mph."
+            puts "You've chosen a moderate pace, which is roughly 11 mph."
             speed = 11.0
         elsif intensity == "w"
-            puts "You've chosen a workout ride, which is roughly 14mph."
+            puts "You've chosen a workout ride, which is roughly 14 mph."
             speed = 14.0
         elsif intensity == "c"
             puts    "Please choose your average speed in MPH:"
