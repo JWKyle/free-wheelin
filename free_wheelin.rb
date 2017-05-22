@@ -146,47 +146,14 @@ puts "Would you like to (p)lan a ride, (l)ist all your locations, (a)dd to your 
 end
         
 
-#### Testing Code ####
-
-# def ride
-#     puts "How many minutes do you have for a bike ride?"
-#     time = gets.chomp.to_f
-#     puts "How intense would you like your ride to be?  (L)eisurely, (M)oderate, (W)orkout, or (C)ustom?"
-#         intensity = gets.chomp.downcase
-#             if intensity == "l"
-#                 puts "You've chosen a leisurely pace, which is roughly 8 mph."
-#                 speed = 8.0
-#             elsif intensity == "m"
-#                 puts "You've chosen a moderate pace, which is roughly 11 mph."
-#                 speed = 11.0
-#             elsif intensity == "w"
-#                 puts "You've chosen a workout ride, which is roughly 14 mph."
-#                 speed = 14.0
-#             elsif intensity == "c"
-#                 puts    "Please choose your average speed in MPH:"
-#                 speed = gets.chomp.to_f
-#             else
-#                 puts "I didn't understand what you typed.  Please try again."
-#             end
-    
-#         location_finder(db, time, speed)
-#  end
-
-
 
 ## TEST CODE ##
 
-# wheels = Wheels.new($db, 45, 13)
-
-#location_maker(db, "900 North", 0)
-
-# wheels.show_locations(db)
-# location_finder(db, time, speed)
 
 # 20.times do 
 #     location_maker(db,Faker::Address.street_name, rand(10))
     
-# end
+
 
 
 
